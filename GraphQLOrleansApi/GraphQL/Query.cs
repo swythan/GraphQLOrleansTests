@@ -1,4 +1,6 @@
-﻿using GraphQLOrleansApi.Model;
+﻿namespace GraphQLOrleansApi.GraphQL;
+
+using GraphQLOrleansApi.Model;
 using GraphQLOrleansApi.Services;
 
 public class Query

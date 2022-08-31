@@ -1,4 +1,4 @@
-using GraphQLOrleansApi;
+using GraphQLOrleansApi.GraphQL;
 using GraphQLOrleansApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);

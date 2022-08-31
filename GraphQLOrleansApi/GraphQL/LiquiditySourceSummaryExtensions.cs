@@ -1,4 +1,4 @@
-﻿namespace GraphQLOrleansApi;
+﻿namespace GraphQLOrleansApi.GraphQL;
 
 using GraphQLOrleansApi.Model;
 using GraphQLOrleansApi.Services;
