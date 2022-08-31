@@ -1,12 +1,18 @@
+using GraphQLOrleansApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>();
 
-var app = builder.Build();
+builder.Services
+    .AddSingleton<ILiquiditySourceSummaryService, LiquiditySourceSummaryService>();
 
-app.MapGet("/", () => "Hello World!");
+builder.Services
+    .AddHostedService<SimulatedOrderWorker>();
+
+var app = builder.Build();
 
 app.MapGraphQL();
 

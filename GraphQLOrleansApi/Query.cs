@@ -1,12 +1,12 @@
-﻿public class Query
+﻿using GraphQLOrleansApi.Model;
+using GraphQLOrleansApi.Services;
+
+public class Query
 {
-    public Book GetBook() =>
-        new()
-        {
-            Title = "C# in depth.",
-            Author = new()
-            {
-                Name = "Jon Skeet"
-            }
-        };
+    [UsePaging]
+    public IEnumerable<LiquiditySourceSummary> GetLiquiditySourceSummaries([Service] ILiquiditySourceSummaryService liquiditySourceSummaryService)
+        => liquiditySourceSummaryService.GetSummaries();
+
+    public LiquiditySourceSummary GetLiquiditySourceSummary(int id, [Service] ILiquiditySourceSummaryService liquiditySourceSummaryService)
+        => liquiditySourceSummaryService.GetSummary(id);
 }
