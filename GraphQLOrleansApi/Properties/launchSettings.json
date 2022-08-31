@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7274;http://localhost:5274"
+      "applicationUrl": "https://localhost:7274/graphql;http://localhost:5274/graphql"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -19,7 +19,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/graphql",
       "publishAllPorts": true,
       "useSSL": true
     }
@@ -28,7 +28,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:60029",
+      "applicationUrl": "http://localhost:60029/graphql",
       "sslPort": 44390
     }
   }
