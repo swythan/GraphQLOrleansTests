@@ -1,5 +1,6 @@
 using GraphQLOrleansApi.GraphQL;
 using GraphQLOrleansApi.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +18,23 @@ builder.Services
 builder.Services
     .AddHostedService<SimulatedOrderWorker>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback);
+        });
+});
+
+
 var app = builder.Build();
 
 app.UseWebSockets();
+app.UseCors();
 
 app.MapGraphQL();
+
+app.MapGet("/liquiditySources/info", (ILiquiditySourceInfoService infoService) => infoService.GetInfo());
 
 app.Run();
