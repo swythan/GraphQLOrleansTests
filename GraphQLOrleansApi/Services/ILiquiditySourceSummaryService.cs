@@ -2,11 +2,13 @@
 
 using GraphQLOrleansApi.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public interface ILiquiditySourceSummaryService
 {
-    void AddOrder(int liquiditySourceId);
-    void AddReject(int liquiditySourceId);
+    ValueTask AddOrderAsync(int liquiditySourceId);
+    ValueTask AddRejectAsync(int liquiditySourceId);
+
     IEnumerable<LiquiditySourceSummary> GetSummaries();
     LiquiditySourceSummary GetSummary(int liquiditySourceId);
 }

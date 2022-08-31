@@ -17,11 +17,11 @@ public class SimulatedOrderWorker : BackgroundService
 
             if (Random.Shared.NextDouble() > 0.1)
             {
-                liquiditySourceSummaryService.AddOrder(liquiditySourceId);
+                await liquiditySourceSummaryService.AddOrderAsync(liquiditySourceId);
             }
             else
             {
-                liquiditySourceSummaryService.AddReject(liquiditySourceId);
+                await liquiditySourceSummaryService.AddRejectAsync(liquiditySourceId);
             }
 
             await Task.Delay(50, stoppingToken);

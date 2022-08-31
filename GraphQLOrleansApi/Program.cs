@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddGraphQLServer()
     .AddTypeExtension<LiquiditySourceSummaryExtensions>()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddSubscriptionType<Subscriptions>()
+    .AddInMemorySubscriptions();
 
 builder.Services
     .AddSingleton<ILiquiditySourceInfoService, LiquiditySourceInfoService>()
@@ -16,6 +18,8 @@ builder.Services
     .AddHostedService<SimulatedOrderWorker>();
 
 var app = builder.Build();
+
+app.UseWebSockets();
 
 app.MapGraphQL();
 
