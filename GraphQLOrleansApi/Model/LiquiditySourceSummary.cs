@@ -1,3 +1,3 @@
 ﻿namespace GraphQLOrleansApi.Model;
 
-public record LiquiditySourceSummary(int Id, int TotalOrderCount, int TotalRejectCount);
+public record LiquiditySourceSummary(int LiquiditySourceId, int TotalOrderCount, int TotalRejectCount);
