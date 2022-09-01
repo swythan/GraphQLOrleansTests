@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { LiqSourceInfosGQL, LiqSourceSummariesGQL, LiqSourceSummaryUpdatesGQL } from '../generated/graphql';
 import { LiquiditySourceInfo, LiquiditySourceSummary } from './model/liquidity-source-data';
 
 @Injectable({
@@ -10,19 +11,31 @@ import { LiquiditySourceInfo, LiquiditySourceSummary } from './model/liquidity-s
 export class LiqSourceService {
 
   constructor(
-    private http: HttpClient) { }
+    private infosGQL: LiqSourceInfosGQL,
+    private summariesGQL: LiqSourceSummariesGQL,
+    private summaryUpdateGQL: LiqSourceSummaryUpdatesGQL ) { }
 
   public getInfos() {
-    return this.http
-      .get<LiquiditySourceInfo[]>('https://localhost:32772/liquiditySources/info/')
+    return this.infosGQL.watch()
+      .valueChanges
       .pipe(
-        catchError(this.handleError<LiquiditySourceInfo[]>('getInfos', [])));
+        map(result => result.data.liquiditySourceInfo.nodes)
+      );
   }
+
   public getSummaries() {
-    return this.http
-      .get<LiquiditySourceSummary[]>('https://localhost:32772/liquiditySources/summary/')
+    return this.summariesGQL.watch()
+      .valueChanges
       .pipe(
-        catchError(this.handleError<LiquiditySourceSummary[]>('getSummaries', [])));
+        map(result => result.data.liquiditySourceSummaries.nodes)
+      );
+  }
+
+  public getSummaryUpdates() {
+    return this.summaryUpdateGQL.subscribe()
+      .pipe(
+        map(result => result.data.summaryUpdated)
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

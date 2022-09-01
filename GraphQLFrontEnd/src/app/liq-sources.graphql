@@ -1,0 +1,33 @@
+query LiqSourceInfos {
+  liquiditySourceInfo {
+    nodes{
+      name
+      id
+      transactionCost
+    }
+  }
+}
+
+query LiqSourceSummaries {
+  liquiditySourceSummaries {
+    nodes{
+      liquiditySource {
+        id
+        name
+      }
+      totalOrderCount
+      totalRejectCount
+    }      
+  } 
+}
+
+subscription LiqSourceSummaryUpdates {
+  summaryUpdated {
+    liquiditySource {
+      id
+      name
+    }
+    totalOrderCount
+    totalRejectCount
+  } 
+}

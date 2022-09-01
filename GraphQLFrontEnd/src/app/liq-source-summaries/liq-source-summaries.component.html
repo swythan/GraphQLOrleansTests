@@ -4,22 +4,15 @@
   <thead>
     <tr>
       <th>ID</th>
-      <!--
-        <th>Name</th>
-        <th>Transaction Cost</th>
-      -->
+      <th>Name</th>
       <th>Total Orders</th>
       <th>Total Rejects</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let summary of summaries$ | async">
-      <td>{{ summary.liquiditySourceId }}</td>
-      <!--
-        <td>{{ summary.liquiditySource.id }}</td>
-        <td>{{ summary.liquiditySource.name }}</td>
-        <td>{{ summary.liquiditySource.transactionCost }}</td>
-      -->
+      <td>{{ summary.liquiditySource.id }}</td>
+      <td>{{ summary.liquiditySource.name }}</td>
       <td>{{ summary.totalOrderCount }}</td>
       <td>{{ summary.totalRejectCount }}</td>
     </tr>

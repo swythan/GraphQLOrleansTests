@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LiqSourceSummariesComponent } from './liq-source-summaries/liq-source-summaries.component';
 import { LiqSourceInfosComponent } from './liq-source-infos/liq-source-infos.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { LiqSourceInfosComponent } from './liq-source-infos/liq-source-infos.com
     LiqSourceInfosComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule, HttpClientModule, GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
