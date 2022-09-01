@@ -27,3 +27,15 @@ export const loadSummariesError = createAction(
   '[Liquidity Sources] Load Summaries Error'
 );
 
+export const startSummaryUpdates = createAction(
+  '[Liquidity Sources] Start Summary Updates'
+);
+
+export const stopSummaryUpdates = createAction(
+  '[Liquidity Sources] Stop Summary Updates'
+);
+
+export const summaryUpdateReceived = createAction(
+  '[Liquidity Sources] Summary Update Received',
+  props<{ summary: LiquiditySourceSummary }>()
+);

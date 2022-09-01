@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LiquiditySourceSummary } from '../model/liquidity-source-data';
 import { selectSummaries } from '../reducers';
-import { loadSummaries } from '../state/liq-source.actions';
+import { loadSummaries, startSummaryUpdates, stopSummaryUpdates } from '../state/liq-source.actions';
 
 @Component({
   selector: 'app-liq-source-summaries',
   templateUrl: './liq-source-summaries.component.html',
   styleUrls: ['./liq-source-summaries.component.css']
 })
-export class LiqSourceSummariesComponent implements OnInit {
+export class LiqSourceSummariesComponent implements OnInit, OnDestroy {
 
   public summaries$: Observable<LiquiditySourceSummary[]>;
 
@@ -19,6 +19,11 @@ export class LiqSourceSummariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadSummaries());
+    this.store.dispatch(startSummaryUpdates());
   }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(stopSummaryUpdates());
+  }
+
 }

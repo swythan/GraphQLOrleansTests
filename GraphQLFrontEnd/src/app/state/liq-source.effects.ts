@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap, takeUntil } from 'rxjs/operators';
 import { LiqSourceService } from '../liq-source.service';
-import { loadInfos, loadInfosError, loadInfosSuccess, loadSummaries, loadSummariesError, loadSummariesSuccess } from './liq-source.actions';
+import { loadInfos, loadInfosError, loadInfosSuccess, loadSummaries, loadSummariesError, loadSummariesSuccess, startSummaryUpdates, stopSummaryUpdates, summaryUpdateReceived } from './liq-source.actions';
 
 @Injectable()
 export class LiquiditySourceEffects {
@@ -31,6 +31,15 @@ export class LiquiditySourceEffects {
       )
     )
   );
+
+  summaryUpdates$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(startSummaryUpdates),
+      switchMap(() => this.liqSourceService.getSummaryUpdates().pipe(
+        takeUntil(this.actions$.pipe(ofType(stopSummaryUpdates))),
+        map(summary => summaryUpdateReceived({ summary }))
+      ))
+    ));
 
   constructor(
     private actions$: Actions,
