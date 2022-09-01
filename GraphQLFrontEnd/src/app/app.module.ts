@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { LiqSourceSummariesComponent } from './liq-source-summaries/liq-source-summaries.component';
+import { LiqSourceInfosComponent } from './liq-source-infos/liq-source-infos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LiqSourceSummariesComponent,
+    LiqSourceInfosComponent
   ],
   imports: [
     BrowserModule, HttpClientModule

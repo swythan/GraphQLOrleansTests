@@ -1,0 +1,18 @@
+<h2>Liquidity Sources Info</h2>
+
+<table *ngIf="(infos$ | async)">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Transaction Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let info of infos$ | async">
+      <td>{{ info.id }}</td>
+      <td>{{ info.name }}</td>
+      <td>{{ info.transactionCost }}</td>
+    </tr>
+  </tbody>
+</table>

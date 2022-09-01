@@ -1,6 +1,5 @@
 using GraphQLOrleansApi.GraphQL;
 using GraphQLOrleansApi.Services;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,5 +35,6 @@ app.UseCors();
 app.MapGraphQL();
 
 app.MapGet("/liquiditySources/info", (ILiquiditySourceInfoService infoService) => infoService.GetInfo());
+app.MapGet("/liquiditySources/summary", (ILiquiditySourceSummaryService summaryService) => summaryService.GetSummaries());
 
 app.Run();
