@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LiqSourceService } from '../liq-source.service';
 import { LiquiditySourceSummary } from '../model/liquidity-source-data';
+import { selectSummaries } from '../reducers';
+import { loadSummaries } from '../state/liq-source.actions';
 
 @Component({
   selector: 'app-liq-source-summaries',
@@ -12,10 +14,11 @@ export class LiqSourceSummariesComponent implements OnInit {
 
   public summaries$: Observable<LiquiditySourceSummary[]>;
 
-  constructor(private liqSourceService: LiqSourceService) { }
-
-  ngOnInit(): void {
-    this.summaries$ = this.liqSourceService.getSummaries()
+    constructor(private store: Store) {
+      this.summaries$ = store.select(selectSummaries);
   }
 
+  ngOnInit(): void {
+    this.store.dispatch(loadSummaries());
+  }
 }

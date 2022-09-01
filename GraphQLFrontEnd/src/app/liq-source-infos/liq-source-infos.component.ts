@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LiqSourceService } from '../liq-source.service';
 import { LiquiditySourceInfo } from '../model/liquidity-source-data';
+import { selectInfos } from '../reducers';
+import { loadInfos } from '../state/liq-source.actions';
 
 @Component({
   selector: 'app-liq-source-infos',
@@ -11,9 +13,11 @@ import { LiquiditySourceInfo } from '../model/liquidity-source-data';
 export class LiqSourceInfosComponent implements OnInit {
   public infos$ : Observable<LiquiditySourceInfo[]>;
 
-  constructor(private liqSourceService: LiqSourceService) { }
+  constructor(private store: Store) {
+    this.infos$ = store.select(selectInfos);
+  }
 
   ngOnInit(): void {
-    this.infos$ = this.liqSourceService.getInfos()
+    this.store.dispatch(loadInfos());
   }
 }
