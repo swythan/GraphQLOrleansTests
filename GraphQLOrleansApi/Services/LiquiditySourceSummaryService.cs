@@ -32,7 +32,7 @@ public class LiquiditySourceSummaryService : ILiquiditySourceSummaryService
         var summary = summaries.AddOrUpdate(
             liquiditySourceId,
             id => new LiquiditySourceSummary(id, TotalOrderCount: 0, TotalRejectCount: 1),
-            (_, prev) => prev with { TotalOrderCount = prev.TotalRejectCount + 1 });
+            (_, prev) => prev with { TotalRejectCount = prev.TotalRejectCount + 1 });
 
         await this.eventSender.SendAsync(nameof(Subscriptions.SummaryUpdated), summary);
     }
